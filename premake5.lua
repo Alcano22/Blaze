@@ -18,9 +18,9 @@ workspace "Blaze"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
-    -- include "Blaze/vendor/GLFW"
-    -- include "Blaze/vendor/Glad"
-    -- include "Blaze/vendor/imgui"
+    include "Blaze/vendor/GLFW"
+    include "Blaze/vendor/Glad"
+    include "Blaze/vendor/imgui"
 group ""
 
 group "Core"

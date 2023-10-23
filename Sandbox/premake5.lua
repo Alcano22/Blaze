@@ -15,10 +15,10 @@ project "Sandbox"
 
     includedirs
     {
-        -- "%{wks.location}/Blaze/vendor/spdlog/include",
+        "%{wks.location}/Blaze/vendor/spdlog/include",
         "%{wks.location}/Blaze/src",
-        -- "%{wks.location}/Blaze/vendor",
-        -- "%{IncludeDir.glm}"
+        "%{wks.location}/Blaze/vendor",
+        "%{IncludeDir.glm}"
     }
 
     links

@@ -14,8 +14,8 @@ project "Blaze"
     {
         "src/**.h",
         "src/**.cpp",
-        -- "vendor/glm/glm/**.hpp",
-        -- "vendor/glm/glm/**.inl"
+        "vendor/glm/glm/**.hpp",
+        "vendor/glm/glm/**.inl"
     }
 
     defines
@@ -27,17 +27,17 @@ project "Blaze"
     {
         "src",
         "vendor/spdlog/include",
-        -- "%{IncludeDir.GLFW}",
-        -- "%{IncludeDir.Glad}",
-        -- "%{IncludeDir.ImGui}",
-        -- "%{IncludeDir.glm}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.glm}"
     }
 
     links
     {
-        -- "GLFW",
-        -- "Glad",
-        -- "ImGui",
+        "GLFW",
+        "Glad",
+        "ImGui",
         "opengl32.lib"
     }
 
