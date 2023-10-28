@@ -40,7 +40,7 @@ namespace Blaze
         m_Data.Width = props.Width;
         m_Data.Height = props.Height;
         
-        BLZ_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+        BLZ_CORE_INFO("Creating window '{0}' ({1}, {2})", props.Title, props.Width, props.Height);
         
         if (!s_GLFWInitialized)
         {
@@ -58,10 +58,9 @@ namespace Blaze
         m_Context->Init();
         
         glfwSetWindowUserPointer(m_Window, &m_Data);
-        SetVSync(true);
 
         // Set GLFW callbacks
-        glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+        glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, const int width, const int height)
         {
             WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
             data.Width = width;

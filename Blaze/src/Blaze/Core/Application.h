@@ -5,6 +5,8 @@
 #include "LayerStack.h"
 #include "Blaze/Event/ApplicationEvent.h"
 
+#include "Blaze/Core/Timestep.h"
+
 #include "Blaze/ImGui/ImGuiLayer.h"
 
 namespace Blaze
@@ -27,14 +29,13 @@ namespace Blaze
     private:
         bool OnWindowClose(WindowCloseEvent& event);
     private:
-        static Application* s_Instance;
-        
         std::unique_ptr<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-
-        uint32_t m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+        float m_LastFrameTime = 0.0f;
+    private:
+        static Application* s_Instance;
     };
 
     Application* CreateApplication();

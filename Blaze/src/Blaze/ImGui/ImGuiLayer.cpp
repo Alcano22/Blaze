@@ -46,7 +46,7 @@ namespace Blaze
             style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         }
 
-        Application& app = Application::Get();
+        const Application& app = Application::Get();
         GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
         // Setup Platform / Renderer bindings
