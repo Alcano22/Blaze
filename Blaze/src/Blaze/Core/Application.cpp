@@ -9,6 +9,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "glm/gtx/io.hpp"
+
 namespace Blaze
 {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -25,6 +27,8 @@ namespace Blaze
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
         m_Window->SetVSync(true);
 
+        Renderer::Init();
+        
         m_ImGuiLayer = new ImGuiLayer();
         PushOverlay(m_ImGuiLayer);
     }
@@ -40,10 +44,13 @@ namespace Blaze
             const float time = (float)glfwGetTime();
             const Timestep timestep = time - m_LastFrameTime;
             m_LastFrameTime = time;
-            
-            for (Layer* layer : m_LayerStack)
-                layer->OnUpdate(timestep);
 
+            if (!m_Minimized)
+            {
+                for (Layer* layer : m_LayerStack)
+                    layer->OnUpdate(timestep);
+            }
+                
             m_ImGuiLayer->Begin();
             for (Layer* layer : m_LayerStack)
                 layer->OnImGuiRender();
@@ -57,6 +64,7 @@ namespace Blaze
     {
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+        dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
         for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
         {
@@ -77,10 +85,23 @@ namespace Blaze
         overlay->OnAttach();
     }
 
-    bool Application::OnWindowClose(WindowCloseEvent& event)
+    bool Application::OnWindowClose(const WindowCloseEvent& event)
     {
         m_Running = false;
         return true;
     }
 
+    bool Application::OnWindowResize(const WindowResizeEvent& event)
+    {
+        if (event.GetWidth() == 0 || event.GetHeight() == 0)
+        {
+            m_Minimized = true;
+            return false;
+        }
+
+        m_Minimized = false;
+        Renderer::OnWindowResize(event.GetWidth(), event.GetHeight());
+        
+        return false;
+    }
 }

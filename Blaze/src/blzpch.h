@@ -9,12 +9,12 @@
 
 #include <string>
 #include <vector>
+#include <array>
 #include <unordered_map>
 #include <unordered_set>
+
+#include "Blaze/Core/Log.h"
 
 #ifdef BLZ_PLATFORM_WINDOWS
 #   include <Windows.h>
 #endif
-
-// using std::shared_ptr;
-// using std::unique_ptr;
